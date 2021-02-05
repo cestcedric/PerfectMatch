@@ -1,4 +1,4 @@
-import tools
+import utils
 
 class PerfectMatch:
     def __init__(self,
@@ -6,7 +6,8 @@ class PerfectMatch:
                 solver,
                 limit):
         self.limit = limit
-        self.match = tools.createMatch()
+        self.match = utils.createMatch()
+        self.outputpath = outputpath
         self.solver = solver
 
     def playMatch(self):
@@ -15,7 +16,7 @@ class PerfectMatch:
         i = 0
         while True:
             prediction = self.solver.predict()
-            score = tools.score(match = self.match, prediction = prediction)
+            score = utils.score(match = self.match, prediction = prediction)
             self.solver.learn(score)
 
             scores.append(score)
@@ -30,5 +31,8 @@ class PerfectMatch:
         else:
             print('Perfect match not found!')
         
-        #TODO: make graph
+        utils.plotScores(
+            outputpath = self.outputpath,
+            data = scores
+        )
         return i
