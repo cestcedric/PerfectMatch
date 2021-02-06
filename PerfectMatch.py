@@ -17,7 +17,9 @@ class PerfectMatch:
         while True:
             prediction = self.solver.predict()
             score = utils.score(match = self.match, prediction = prediction)
-            self.solver.learn(score)
+            self.solver.updateScore(score)
+            if self.solver.check():
+                self.solver.updateCheck(self.solver.checkIndex())
 
             scores.append(score)
 

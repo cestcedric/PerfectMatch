@@ -1,12 +1,13 @@
+from solvers import Solver
 
 class Tryhard:
 
     def __init__(self):
-        #TODO: initialize
+        Solver.__init__(self)
         print('Tryhard solver initialized!')
 
     def predict(self):
-        return None
+        raise NotImplementedError
 
-    def learn(self):
-        return None
+    def updateScore(self, score):
+        raise NotImplementedError

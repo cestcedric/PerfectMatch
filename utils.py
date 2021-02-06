@@ -6,7 +6,14 @@ def createMatch():
     return [ x for x in np.random.permutation(range(10)) ]
     
 def score(match, prediction):
+    assert validPrediction(prediction)
     return np.sum(np.array(match) == np.array(prediction))
+
+def validPrediction(prediction):
+    for i in range(len(prediction)):
+        if not i in prediction:
+            return False
+    return True
 
 def checkBox(match, prediction, index):
     return match[index] == prediction[index]
