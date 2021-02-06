@@ -14,7 +14,7 @@ solver = None
 def play(rounds):
     fill = len(str(rounds))
     tries = []
-    for i in range(0, rounds + 1):
+    for i in range(1, rounds + 1):
         print('Round ' + str(i).zfill(fill) + '/' + str(rounds) + ': ', end='')
         match = PerfectMatch.PerfectMatch(
             outputpath = os.path.join(outputpath, str(i).zfill(fill)), 
@@ -33,11 +33,6 @@ def play(rounds):
 if __name__ == '__main__':
 
     args = my_args
-
-    # Set parameters here for debugging
-    args.limit = 100
-    args.rounds = 1000
-    args.id = 'test'
 
     np.random.seed(args.seed)
     outputpath = os.path.join(args.output, args.id)
