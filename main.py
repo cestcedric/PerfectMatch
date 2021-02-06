@@ -14,13 +14,21 @@ solver = None
 def play(rounds):
     fill = len(str(rounds))
     tries = []
+    performance = []
     for i in range(1, rounds + 1):
         print('Round ' + str(i).zfill(fill) + '/' + str(rounds) + ': ', end='')
         match = PerfectMatch.PerfectMatch(
-            outputpath = os.path.join(outputpath, str(i).zfill(fill)), 
-            solver = solver, 
+            solver = solver,
+            matches = args.matches,
             limit = args.limit)
-        tries.append(match.playMatch())
+        t, p = match.playMatch()
+        tries.append(t)
+        performance.append(p)
+        utils.plotScores(
+            outputpath = os.path.join(outputpath, str(i).zfill(fill)),
+            data = p
+        )
+
     print('Mean number of tries to guess match:', np.average(tries))
     print('Median number of tries to guess match:', np.median(tries))
     utils.plotHistogram(
@@ -28,6 +36,13 @@ def play(rounds):
         data = tries,
         range = [0, args.limit],
         bins = 10)
+    auc_roc = utils.plotAUCROC(
+        outputpath = os.path.join(outputpath, 'auc-roc'),
+        data = performance,
+        limit = args.limit,
+        maxScore = args.matches
+    )
+    print('Mean AUC-ROC: {:.2f}'.format(auc_roc))
 
 
 if __name__ == '__main__':

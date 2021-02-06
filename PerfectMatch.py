@@ -2,12 +2,12 @@ import utils
 
 class PerfectMatch:
     def __init__(self,
-                outputpath,
                 solver,
+                matches,
                 limit):
         self.limit = limit
-        self.match = utils.createMatch()
-        self.outputpath = outputpath
+        self.matches = matches
+        self.match = utils.createMatch(self.matches)
         self.solver = solver
 
     def playMatch(self):
@@ -19,7 +19,11 @@ class PerfectMatch:
             score = utils.score(match = self.match, prediction = prediction)
             self.solver.updateScore(score)
             if self.solver.check():
-                self.solver.updateCheck(self.solver.checkIndex())
+                check = utils.checkBox(
+                    match = self.match, 
+                    prediction = prediction, 
+                    index = self.solver.checkIndex())
+                self.solver.updateCheck(check)
 
             scores.append(score)
 
@@ -33,8 +37,4 @@ class PerfectMatch:
         else:
             print('Perfect match not found!')
         
-        utils.plotScores(
-            outputpath = self.outputpath,
-            data = scores
-        )
-        return i
+        return i, scores

@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def createMatch():
-    return [ x for x in np.random.permutation(range(10)) ]
+def createMatch(matches):
+    return [ x for x in np.random.permutation(range(matches)) ]
     
 def score(match, prediction):
     assert validPrediction(prediction)
@@ -18,6 +18,21 @@ def validPrediction(prediction):
 def checkBox(match, prediction, index):
     return match[index] == prediction[index]
 
+def cumulative(data):
+    maxScore = -1
+    out = []
+    for d in data:
+        if d > maxScore:
+            maxScore = d
+        out.append(maxScore)
+    return out
+
+def padded(data, length = 0):
+    if len(data) < length:
+        pad = [data[-1]]*(length - len(data))
+        return data + pad
+    return data
+
 def plotScores(outputpath, data):
     fig, ax = plt.subplots()
     ax.scatter(x = range(len(data)), y = data)
@@ -29,7 +44,30 @@ def plotScores(outputpath, data):
 def plotHistogram(outputpath, data, range = [0, 10e6], bins = 100):
     fig, ax = plt.subplots()
     ax.hist(data, range = range, bins = bins)
-    ax.set_xlabel('Tries')
-    ax.set_ylabel('#Runs')
+    ax.set_xlabel('# Tries')
+    ax.set_ylabel('# Runs')
     fig.savefig(outputpath + '.pdf', format = 'pdf', bbox_inches = 'tight')
     plt.close(fig)
+
+def plotAUCROC(outputpath, data, limit, maxScore):
+    # compute AUC-ROC equivalent
+    list_cumulative = [ padded(cumulative(d), limit) for d in data ]
+    list_average = [ sum(x)/len(x) for x in zip(*list_cumulative) ]
+    list_ratio = [ x/maxScore for x in list_average ]
+    auc_roc = np.sum(list_average) / (limit*maxScore)
+    # plot
+    fig, ax = plt.subplots()
+    ax.plot(list_ratio)
+    ax.plot([0, 0], [1, 1], color='k', linestyle='-', linewidth=2)
+    ax.set_xlabel('Iteration')
+    ax.set_ylabel('Share of correct matches')
+    ax.set_ylim(0,1)
+    ax.text(0.05, 0.95, 
+            'Mean AUC-ROC: {:.2f}'.format(auc_roc), 
+            transform=ax.transAxes, 
+            fontsize=14,
+            verticalalignment='top', 
+            bbox = {'boxstyle':'round', 'facecolor':'white'})
+    fig.savefig(outputpath + '.pdf', format = 'pdf', bbox_inches = 'tight')
+    plt.close(fig)
+    return auc_roc
