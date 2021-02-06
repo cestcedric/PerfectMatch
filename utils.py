@@ -58,7 +58,7 @@ def plotAUCROC(outputpath, data, limit, maxScore):
     # plot
     fig, ax = plt.subplots()
     ax.plot(list_ratio)
-    ax.plot([0, 0], [1, 1], color='k', linestyle='-', linewidth=2)
+    ax.plot([0, limit], [0, 1], color = 'red', linestyle = '--', linewidth = 1)
     ax.set_xlabel('Iteration')
     ax.set_ylabel('Share of correct matches')
     ax.set_ylim(0,1)
