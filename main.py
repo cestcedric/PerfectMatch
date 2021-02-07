@@ -1,4 +1,3 @@
-from   args import my_args
 import glob
 import importlib
 import numpy as np
@@ -7,6 +6,7 @@ import PerfectMatch
 import solvers
 import sys
 from   util import logger, utils
+from   util.args import my_args
 
 args = None
 outputpath = None

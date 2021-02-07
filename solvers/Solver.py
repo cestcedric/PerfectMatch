@@ -1,6 +1,6 @@
 class Solver:
     def __init__(self, matches = 10):
-        self.base = [ x for x in range(matches) ]
+        pass
 
     def predict(self):
         raise NotImplementedError
@@ -12,7 +12,7 @@ class Solver:
         raise NotImplementedError
 
     def updateScore(self, score):
-        return None
+        pass
     
     def updateCheck(self, check):
-        return None
+        pass
