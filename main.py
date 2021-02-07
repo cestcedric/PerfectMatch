@@ -5,7 +5,8 @@ import numpy as np
 import os
 import PerfectMatch
 import solvers
-import utils
+import sys
+from   util import logger, utils
 
 args = None
 outputpath = None
@@ -73,6 +74,7 @@ if __name__ == '__main__':
     files = glob.glob(os.path.join(outputpath,'*'))
     for f in files:
         os.remove(f)
+    sys.stdout = logger.Logger(os.path.join(outputpath, 'out.log'))
 
     print('-'*50)
     print('Run ID:', args.id)
