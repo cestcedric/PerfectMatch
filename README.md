@@ -4,8 +4,12 @@
 
 ## Task
 
-A perfect match is a bidirectional mapping between 10 and 10 agents.
-TODO: how is matching tested
+A perfect match is a bijective mapping between 2xN points.
+Solving this matching is supported by two ways to gain information: a score signaling the overall number of correctly matched points (without revealing which are the correct pairs) and the possibility to directly investigate whether or not a single pairing is part of the perfect match.
+
+This is a round based game, where both the total score as well as one pairing can be checked per iteration.
+
+A polarizing adaption of this problem with 2x10 participants is implemented in the RTL2 show "Are you the One", which is not necessarily endorsed by everyone.
 
 ----
 
