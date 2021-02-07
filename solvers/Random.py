@@ -4,7 +4,7 @@ from   solvers import Solver
 class Random(Solver):
 
     def __init__(self, matches = 10):
-        Solver.__init__(self)
+        Solver.__init__(self, matches)
         self.matches = matches
         self.base = [ x for x in range(self.matches) ]
         print('Random solver initialized!')

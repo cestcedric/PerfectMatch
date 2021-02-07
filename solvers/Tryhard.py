@@ -1,7 +1,7 @@
 import itertools
 from   solvers import Solver
 
-class Tryhard:
+class Tryhard(Solver):
 
     def __init__(self, matches = 10):
         Solver.__init__(self, matches)
@@ -11,15 +11,3 @@ class Tryhard:
 
     def predict(self):
         return next(self.generator)
-
-    def check(self):
-        return False
-
-    def checkIndex(self):
-        raise NotImplementedError
-
-    def updateScore(self, score):
-        pass
-    
-    def updateCheck(self, check):
-        pass

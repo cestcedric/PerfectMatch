@@ -5,7 +5,7 @@ class Solver:
     def predict(self):
         raise NotImplementedError
 
-    def check(self):
+    def performCheck(self):
         return False
 
     def checkIndex(self):

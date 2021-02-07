@@ -18,8 +18,8 @@ class PerfectMatch:
             prediction = self.solver.predict()
             score = utils.score(match = self.match, prediction = prediction)
             self.solver.updateScore(score)
-            if self.solver.check():
-                check = utils.checkBox(
+            if self.solver.performCheck():
+                check = utils.checkPair(
                     match = self.match, 
                     prediction = prediction, 
                     index = self.solver.checkIndex())

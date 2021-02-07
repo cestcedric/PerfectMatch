@@ -19,7 +19,7 @@ def validPrediction(prediction):
     return True
 
 
-def checkBox(match, prediction, index):
+def checkPair(match, prediction, index):
     return match[index] == prediction[index]
 
 
