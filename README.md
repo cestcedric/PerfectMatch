@@ -9,13 +9,13 @@ Solving this matching is supported by two ways to gain information: a score sign
 
 This is a round based game, where both the total score as well as one pairing can be checked per iteration.
 
-A polarizing adaption of this problem with 2x10 participants is implemented in the RTL2 show "Are you the One", which is not necessarily endorsed by everyone.
+A questionable adaption of this problem with 2x10 participants is implemented in the RTL2 show "Are you the One", which is not necessarily endorsed by everyone.
 
 ----
 
 ## Leaderboard
 
-Entries on the leaderboard are playing 1000 rounds with 10 matches.
+Entries on the leaderboard are playing 1000 rounds with 10 pairings.
 
 | Algorithm | Mean tries | Median tries | AUC-ROC |
 |-----------|------------|--------------|---------|

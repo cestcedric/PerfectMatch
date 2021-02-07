@@ -24,13 +24,18 @@ def play(rounds):
         t, p = match.playMatch()
         tries.append(t)
         performance.append(p)
-        utils.plotScores(
-            outputpath = os.path.join(outputpath, str(i).zfill(fill)),
-            data = p
-        )
+        if args.verbose:
+            utils.plotScores(
+                outputpath = os.path.join(outputpath, str(i).zfill(fill)),
+                data = p
+            )
 
     print('Mean number of tries to guess match:', np.average(tries))
     print('Median number of tries to guess match:', np.median(tries))
+    utils.plotScoreSummary(
+        outputpath = os.path.join(outputpath, 'summary'),
+        data = performance
+    )
     utils.plotHistogram(
         outputpath = os.path.join(outputpath, 'hist'), 
         data = tries,

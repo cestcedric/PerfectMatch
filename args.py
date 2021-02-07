@@ -10,6 +10,8 @@ ap.add_argument('--output', type = str, default = 'output', help = 'Output direc
 ap.add_argument('--rounds', type = int, default = 2, help = 'Seasons of PerfectMatch played (default: 1)')
 ap.add_argument('--seed', type = int, default = 69420, help = 'Seed for match generation (default: 69420)')
 ap.add_argument('--solver', type = str, default = 'Random', help = 'Solver to guess matching (default: Random)')
+ap.add_argument('--verbose', action = 'store_true', help = 'Plot scores for all rounds (default: False, just plot 5 rounds)')
+ap.set_defaults(verbose = False)
 
 
 my_args = ap.parse_args()
