@@ -33,6 +33,8 @@ def play(rounds):
 
     print('Mean number of tries to guess match:', np.average(tries))
     print('Median number of tries to guess match:', np.median(tries))
+    print('Minimum number of tries to guess match:', np.min(tries))
+    print('Maximum number of tries to guess match:', np.max(tries))
     utils.plotScoreSummary(
         outputpath = os.path.join(outputpath, 'summary'),
         data = performance,

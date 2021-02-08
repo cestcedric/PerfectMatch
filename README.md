@@ -17,6 +17,6 @@ A questionable adaption of this problem with 2x10 participants is implemented in
 
 Entries on the leaderboard are playing 1000 rounds with 10 pairings.
 
-| Algorithm | Mean tries | Median tries | AUC-ROC |
-|-----------|------------|--------------|---------|
-| TestRotate | 30.654 | 31 | 1.00 |
+| Algorithm | Mean tries | Median tries | Min tries | Max tries | AUC-ROC |
+|-----------|------------|--------------|-----------|-----------|---------|
+| TestRotate | 30.654 | 31 | 13| 46 | 1.00 |
