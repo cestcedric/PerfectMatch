@@ -35,12 +35,13 @@ def play(rounds):
     print('Median number of tries to guess match:', np.median(tries))
     utils.plotScoreSummary(
         outputpath = os.path.join(outputpath, 'summary'),
-        data = performance
+        data = performance,
+        rounds = rounds
     )
     utils.plotHistogram(
         outputpath = os.path.join(outputpath, 'hist'), 
         data = tries,
-        range = [0, args.limit],
+        range = [0, np.array(tries).max()],
         bins = 10)
     auc_roc = utils.plotAUCROC(
         outputpath = os.path.join(outputpath, 'auc-roc'),

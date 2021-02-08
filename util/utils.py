@@ -49,9 +49,9 @@ def plotScores(outputpath, data):
     plt.close(fig)
 
 
-def plotScoreSummary(outputpath, data):
+def plotScoreSummary(outputpath, data, rounds):
     markers = ['o', '*', '+', 'x', 'v']
-    samples = random.sample(data, 5)
+    samples = random.sample(data, min(5, rounds))
 
     fig, ax = plt.subplots()
     ax.set_xlabel('Iteration')
