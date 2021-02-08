@@ -19,3 +19,4 @@ Entries on the leaderboard are playing 1000 rounds with 10 pairings.
 
 | Algorithm | Mean tries | Median tries | AUC-ROC |
 |-----------|------------|--------------|---------|
+| TestRotate | 30.654 | 31 | 1.00 |
