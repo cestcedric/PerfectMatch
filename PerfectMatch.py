@@ -8,12 +8,13 @@ class PerfectMatch:
         self.limit = limit
         self.matches = matches
         self.match = utils.createMatch(self.matches)
-        self.solver = solver
+        self.solver = solver.reset()
 
     def playMatch(self):
         solved = False
         scores = []
         i = 0
+        
         while True:
             prediction = self.solver.predict()
             score = utils.score(match = self.match, prediction = prediction)

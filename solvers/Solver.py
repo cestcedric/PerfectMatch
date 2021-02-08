@@ -16,3 +16,6 @@ class Solver:
     
     def updateCheck(self, check):
         pass
+
+    def reset(self):
+        return self
