@@ -19,4 +19,5 @@ Entries on the leaderboard are playing 1000 rounds with 10 pairings.
 
 | Algorithm | Mean tries | Median tries | Min tries | Max tries | AUC-ROC |
 |-----------|------------|--------------|-----------|-----------|---------|
-| TestRotate | 30.654 | 31 | 13| 46 | 1.00 |
+| Bumblesort | 20.177 | 20 | 10 | 31 | 1.00 |
+| TestRotate | 30.654 | 31 | 13 | 46 | 1.00 |
