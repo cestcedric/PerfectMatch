@@ -20,7 +20,6 @@ class TestRotate(Solver):
 
         self.index = 0
         self.testIndex = 0
-        self.update = [self.index,self.index]
 
         return self
 
