@@ -1,6 +1,10 @@
 import itertools
 from   solvers import Solver
 
+'''
+The Tryhard solver iterates over all possible permutations and completely ignores feedback.
+'''
+
 class Tryhard(Solver):
 
     def __init__(self, matches = 10):

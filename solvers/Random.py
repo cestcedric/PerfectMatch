@@ -1,6 +1,10 @@
 import random
 from   solvers import Solver
 
+'''
+The Random solver just produces random permutations and ignores feedback.
+'''
+
 class Random(Solver):
 
     def __init__(self, matches = 10):
