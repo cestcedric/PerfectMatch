@@ -62,7 +62,7 @@ if __name__ == '__main__':
     outputpath = os.path.join(args.output, args.id)
 
     try:
-        solver = solvers.__dict__[args.solver](matches = 10)
+        solver = solvers.__dict__[args.solver](matches = args.matches)
     except:
         print('Solver not found:', args.solver)
         print('Import and register solver in solvers.__init__.py')
