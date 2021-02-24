@@ -8,11 +8,14 @@ import sys
 from   util import logger, utils
 from   util.args import my_args
 
-args = None
-outputpath = None
-solver = None
+def play(limit, matches, outputpath, rounds, solver, verbose = False):
+    try:
+        solver = solvers.__dict__[solver](matches = matches)
+    except:
+        print('Solver not found:', args.solver)
+        print('Import and register solver in solvers.__init__.py')
+        exit(1)
 
-def play(rounds):
     fill = len(str(rounds))
     tries = []
     performance = []
@@ -20,12 +23,12 @@ def play(rounds):
         print('Round ' + str(i).zfill(fill) + '/' + str(rounds) + ': ', end='')
         match = PerfectMatch.PerfectMatch(
             solver = solver,
-            matches = args.matches,
-            limit = args.limit)
+            matches = matches,
+            limit = limit)
         t, p = match.playMatch()
         tries.append(t)
         performance.append(p)
-        if args.verbose:
+        if verbose:
             utils.plotScores(
                 outputpath = os.path.join(outputpath, str(i).zfill(fill)),
                 data = p
@@ -48,10 +51,35 @@ def play(rounds):
     auc_roc = utils.plotAUCROC(
         outputpath = os.path.join(outputpath, 'auc-roc'),
         data = performance,
-        limit = args.limit,
-        maxScore = args.matches
+        limit = limit,
+        maxScore = matches
     )
     print('Mean AUC-ROC: {:.2f}'.format(auc_roc))
+    return np.average(tries)
+
+
+def complexityAnalysis(limit, matches, outputpath, rounds, solver, verbose = False):
+    numMatches = []
+    tries = []
+    assert matches > 2
+    for N in range(2, matches + 1):
+        numMatches.append(N)
+        with logger.suppress_stdout():
+            t = play(limit = N**2, 
+                matches = N, 
+                outputpath = outputpath, 
+                rounds = args.rounds, 
+                solver = args.solver, 
+                verbose = False)
+        tries.append(t)
+        print('N:', N)
+        print(t, 'tries')
+    utils.plotComplexity(
+        outputpath = os.path.join(outputpath, 'complexity'), 
+        x = numMatches, 
+        y = tries
+    )
+
 
 
 if __name__ == '__main__':
@@ -60,13 +88,6 @@ if __name__ == '__main__':
 
     np.random.seed(args.seed)
     outputpath = os.path.join(args.output, args.id)
-
-    try:
-        solver = solvers.__dict__[args.solver](matches = args.matches)
-    except:
-        print('Solver not found:', args.solver)
-        print('Import and register solver in solvers.__init__.py')
-        exit(1)
 
     if not os.path.exists(args.output):
         os.mkdir(args.output)
@@ -87,7 +108,20 @@ if __name__ == '__main__':
     print('Maximum tries:', args.limit)
     print('-'*50)
 
-    play(rounds = args.rounds)
+    if args.complexity:
+        complexityAnalysis(limit = args.limit, 
+            matches = args.matches, 
+            outputpath = outputpath, 
+            rounds = args.rounds, 
+            solver = args.solver, 
+            verbose = args.verbose)
+    else:
+        play(limit = args.limit, 
+            matches = args.matches, 
+            outputpath = outputpath, 
+            rounds = args.rounds, 
+            solver = args.solver, 
+            verbose = args.verbose)
 
     print('='*50)
 

@@ -1,3 +1,4 @@
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -38,6 +39,24 @@ def padded(data, length = 0):
         pad = [data[-1]]*(length - len(data))
         return data + pad
     return data
+
+
+def plotComplexity(outputpath, x, y):
+    fig, ax = plt.subplots()
+    ax.scatter(x = x, y = y)
+    # plot complexity comparisons: n, n*ln(n) and n^2
+    ax.plot(x, x, 'g')
+    ax.plot(x, [i*np.log(i) + 1 for i in x], 'y')
+    xq = np.arange(x[0], np.sqrt(np.max(y)) + 1)
+    ax.plot(xq, np.array(xq)**2, 'r')
+    ax.set_xlabel('Matches')
+    ax.set_ylabel('Iterations')
+    label_lin = mpatches.Patch(color = 'g', label = r'$O(x)$')
+    label_log = mpatches.Patch(color = 'y', label = r'$O(x \cdot ln(x))$')
+    label_sqr = mpatches.Patch(color = 'r', label = r'$O(x^2)$')
+    plt.legend(handles=[label_sqr, label_log, label_lin])
+    fig.savefig(outputpath + '.pdf', format = 'pdf', bbox_inches = 'tight')
+    plt.close(fig)
 
 
 def plotScores(outputpath, data):

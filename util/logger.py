@@ -1,3 +1,5 @@
+from   contextlib import contextmanager
+import os
 import sys
 
 class Logger(object):
@@ -14,3 +16,13 @@ class Logger(object):
 
     def flush(self):
         pass    
+
+@contextmanager
+def suppress_stdout():
+    with open(os.devnull, 'w') as devnull:
+        old_stdout = sys.stdout
+        sys.stdout = devnull
+        try:  
+            yield
+        finally:
+            sys.stdout = old_stdout

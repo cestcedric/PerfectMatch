@@ -21,3 +21,13 @@ Entries on the leaderboard are playing 1000 rounds with 10 pairings.
 |-----------|------------|--------------|-----------|-----------|---------|
 | Bumblesort | 20.177 | 20 | 10 | 31 | 1.00 |
 | TestRotate | 30.654 | 31 | 13 | 46 | 1.00 |
+
+## Complexity Analysis
+
+Complexity analysis (available by running the program with `--complexity`) is performed by solving the game for 2 to 2xN points, where N is defined by `--matches`.
+
+----
+
+## TODO
+
+Save complexity analysis results to .csv and combine all results to one big graph.

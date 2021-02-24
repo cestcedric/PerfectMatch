@@ -32,7 +32,6 @@ class PerfectMatch:
             i += 1
             if solved or i >= self.limit:
                 break
-        
         if solved:
             print('Perfect match found after', i, 'tries!')
         else:
