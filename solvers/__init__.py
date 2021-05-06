@@ -7,7 +7,7 @@ from .Tryhard import *
 
 __all__ = (
         'Bumblesort',
-        'Bumblesort_v2',
+        'BSv2',
         'Random',
         'TestRotate',
         'Tryhard'
